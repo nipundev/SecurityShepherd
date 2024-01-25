@@ -10,6 +10,7 @@ import android.util.Log;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.Toast;
+import java.security.SecureRandom;
 import java.util.Random;
 
 public class UnintendedDataLeakage2 extends MainActivity
@@ -76,7 +77,7 @@ public class UnintendedDataLeakage2 extends MainActivity
     return super.onOptionsItemSelected(item);
   }
 
-  private static Random random = new Random();
+  private static Random random = new SecureRandom();
 
   public static String getRandomNumber(int digCount) {
     StringBuilder sb = new StringBuilder(digCount);

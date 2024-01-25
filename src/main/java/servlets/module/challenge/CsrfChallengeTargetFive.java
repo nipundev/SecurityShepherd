@@ -4,6 +4,7 @@ import dbProcs.Getter;
 import dbProcs.Setter;
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.security.SecureRandom;
 import java.util.Locale;
 import java.util.Random;
 import java.util.ResourceBundle;
@@ -79,7 +80,7 @@ public class CsrfChallengeTargetFive extends HttpServlet {
         if (ses.getAttribute("csrfChallengeFiveNonce") == null
             || ses.getAttribute("csrfChallengeFiveNonce").toString().isEmpty()) {
           log.debug("No CSRF Token associated with user");
-          Random random = new Random();
+          Random random = new SecureRandom();
           int newToken = random.nextInt(3);
           out.write(csrfGenerics.getString("target.noTokenNewToken") + " " + newToken + "<br><br>");
           storedToken = "" + newToken;
