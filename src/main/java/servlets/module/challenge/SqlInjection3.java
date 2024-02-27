@@ -4,6 +4,7 @@ import dbProcs.Database;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.sql.Connection;
+import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
@@ -88,11 +89,12 @@ public class SqlInjection3 extends HttpServlet {
 
         log.debug("Getting Connection to Database");
         Connection conn = Database.getChallengeConnection(ApplicationRoot, "SqlChallengeThree");
-        Statement stmt = conn.createStatement();
+        PreparedStatement stmt = conn.prepareStatement("SELECT customerName FROM customers WHERE customerName = ?");
         log.debug("Gathering result set");
+        stmt.setString(1, theUserName);
         ResultSet resultSet =
-            stmt.executeQuery(
-                "SELECT customerName FROM customers WHERE customerName = '" + theUserName + "'");
+            stmt.execute(
+            );
 
         int i = 0;
         htmlOutput = "<h2 class='title'>" + bundle.getString("response.searchResults") + "</h2>";

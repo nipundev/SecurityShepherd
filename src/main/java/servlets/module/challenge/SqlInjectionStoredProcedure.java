@@ -4,6 +4,7 @@ import dbProcs.Database;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.sql.Connection;
+import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
@@ -78,8 +79,9 @@ public class SqlInjectionStoredProcedure extends HttpServlet {
         Connection conn =
             Database.getChallengeConnection(ApplicationRoot, "SqlChallengeStoredProc");
         // CallableStatement callstmt = conn.prepareCall("CALL findUser('" + userIdentity + "');");
-        Statement stmt = conn.createStatement();
-        ResultSet resultSet = stmt.executeQuery("CALL findUser('" + userIdentity + "');");
+        PreparedStatement stmt = conn.prepareStatement("CALL findUser(?" + ");");
+        stmt.setString(1, userIdentity);
+        ResultSet resultSet = stmt.execute();
 
         int i = 0;
         htmlOutput = "<h2 class='title'>" + bundle.getString("response.searchResults") + "</h2>";
