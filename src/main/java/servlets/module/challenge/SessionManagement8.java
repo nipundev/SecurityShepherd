@@ -134,9 +134,9 @@ public class SessionManagement8 extends HttpServlet {
             log.debug("Param value of " + redherringTwo + ":" + paramTwo);
             log.debug("Param value of " + redherringThr + ":" + paramThr);
             hackDetected =
-                !(paramOne.equalsIgnoreCase("false")
-                    && paramTwo.equalsIgnoreCase("false")
-                    && paramThr.equalsIgnoreCase("false"));
+                !("false".equalsIgnoreCase(paramOne)
+                    && "false".equalsIgnoreCase(paramTwo)
+                    && "false".equalsIgnoreCase(paramThr));
           }
           if (!hackDetected) {
             htmlOutput =

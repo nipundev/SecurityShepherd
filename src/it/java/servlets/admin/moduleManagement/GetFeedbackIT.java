@@ -157,7 +157,7 @@ public class GetFeedbackIT {
           // Add Cookies from Response to outgoing request
           request.setCookies(response.getCookies());
           String responseBody = doThePost(csrfToken, feedbackModule);
-          if (responseBody.isEmpty() || responseBody.equalsIgnoreCase("Error Occurred!")) {
+          if (responseBody.isEmpty() || "Error Occurred!".equalsIgnoreCase(responseBody)) {
             String message = "Module Feedback collection Failed";
             log.fatal(message);
             fail(message);
@@ -196,12 +196,12 @@ public class GetFeedbackIT {
         // Add Cookies from Response to outgoing request
         request.setCookies(response.getCookies());
         String responseBody = doThePost(csrfToken, "wrongForNoResult");
-        if (responseBody.isEmpty() || responseBody.equalsIgnoreCase("Error Occurred!")) {
+        if (responseBody.isEmpty() || "Error Occurred!".equalsIgnoreCase(responseBody)) {
           String message = "Module Feedback collection Failed";
           log.fatal(message);
           fail(message);
         } else {
-          if (responseBody.equals("No Feedback Found!")) {
+          if ("No Feedback Found!".equals(responseBody)) {
             log.debug("No Feedback Result Returned");
           } else {
             String message = "Did not get No Feedback Error";
@@ -238,7 +238,7 @@ public class GetFeedbackIT {
       // Add Cookies from Response to outgoing request
       request.setCookies(response.getCookies());
       String responseBody = doThePost("wrongToken", moduleId);
-      if (responseBody.equalsIgnoreCase("Error Occurred!")) {
+      if ("Error Occurred!".equalsIgnoreCase(responseBody)) {
         log.debug("PASS: CSRF Error Occurred when incorrect CSRF token was supplied");
       } else {
         TestProperties.failAndPrint("CSRF Error Not Detected with Bad CSRF Token");

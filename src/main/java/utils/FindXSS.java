@@ -239,7 +239,7 @@ public class FindXSS {
             log.debug("URL Path: " + csrfUrl.getPath());
             log.debug("URL Query: " + csrfUrl.getQuery());
             validUrl =
-                csrfUrl.getPath().toLowerCase().equalsIgnoreCase("/root/grantComplete/csrflesson");
+                "/root/grantComplete/csrflesson".equalsIgnoreCase(csrfUrl.getPath().toLowerCase());
             if (!validUrl) {
               log.debug("1");
             }
@@ -425,8 +425,8 @@ public class FindXSS {
                 break;
               }
             }
-            if (uriAttributeValue.equalsIgnoreCase("data")
-                || uriAttributeValue.equalsIgnoreCase("javascript")) {
+            if ("data".equalsIgnoreCase(uriAttributeValue)
+                || "javascript".equalsIgnoreCase(uriAttributeValue)) {
               log.debug("URI XSS Detected");
               xssDetected = true;
             }

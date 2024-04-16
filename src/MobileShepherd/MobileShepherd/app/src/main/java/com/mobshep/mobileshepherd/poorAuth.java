@@ -109,7 +109,7 @@ public class poorAuth extends Activity implements OnClickListener {
           empty.show();
         }
 
-        if (CheckName.equals("Jack") == false
+        if ("Jack".equals(CheckName) == false
             || CheckPass.equals(poorAuth_Reset.tempPassVar) == false
             || passwordReset == false) {
           Toast invalid = Toast.makeText(poorAuth.this, "Invalid Credentials!", Toast.LENGTH_SHORT);

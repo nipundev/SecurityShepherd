@@ -86,7 +86,7 @@ public class poorAuth2_Main extends Activity {
 
     String codeString = authCode.getText().toString();
 
-    if (codeString.equals("")) {
+    if ("".equals(codeString)) {
       Toast.makeText(this, "Blank Fields Detected", Toast.LENGTH_SHORT).show();
       return false;
     }

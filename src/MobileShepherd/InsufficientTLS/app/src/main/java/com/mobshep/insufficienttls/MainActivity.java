@@ -178,7 +178,7 @@ public class MainActivity extends AppCompatActivity {
     SharedPreferences SP = PreferenceManager.getDefaultSharedPreferences(getBaseContext());
     String sesh = SP.getString("session", "null");
 
-    if (sesh.equals("null")) {
+    if ("null".equals(sesh)) {
       return false;
     } else {
       return true;

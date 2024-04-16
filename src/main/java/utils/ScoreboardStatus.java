@@ -38,7 +38,7 @@ public class ScoreboardStatus {
       if (userRole == null) {
         return false;
       }
-      authorised = userRole.equalsIgnoreCase("admin");
+      authorised = "admin".equalsIgnoreCase(userRole);
     } else if (publicScoreboard) {
       // Scoreboard is public, always allow scoreboard to be shown, even to
       // unauthorized users

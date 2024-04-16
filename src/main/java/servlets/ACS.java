@@ -251,7 +251,7 @@ public class ACS extends HttpServlet {
 
               ses.setAttribute("userClass", user[4]);
 
-              if (user[5].equalsIgnoreCase("true")) {
+              if ("true".equalsIgnoreCase(user[5])) {
                 log.debug("Temporary Username Detected, user will be prompted to change");
                 ses.setAttribute("ChangeUsername", "true");
               }

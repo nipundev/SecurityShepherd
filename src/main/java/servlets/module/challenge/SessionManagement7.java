@@ -95,7 +95,7 @@ public class SessionManagement7 extends HttpServlet {
           byte[] decodedCookieBytes = Base64.decodeBase64(theCookie.getValue());
           String decodedCookie = new String(decodedCookieBytes, "UTF-8");
           log.debug("Decoded Cookie: " + decodedCookie);
-          if (decodedCookie.equals("doNotReturnAnswers")) // Untampered Cookie
+          if ("doNotReturnAnswers".equals(decodedCookie)) // Untampered Cookie
           {
             log.debug("Getting Challenge Parameters");
             Object nameObj = request.getParameter("subName");

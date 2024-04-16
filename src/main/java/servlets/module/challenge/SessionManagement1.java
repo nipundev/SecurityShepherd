@@ -93,7 +93,7 @@ public class SessionManagement1 extends HttpServlet {
           String decodedCookie = new String(decodedCookieBytes, "UTF-8");
           log.debug("Decoded Cookie: " + decodedCookie);
 
-          if (decodedCookie.equals("userRole=administrator")) {
+          if ("userRole=administrator".equals(decodedCookie)) {
             log.debug("Challenge Complete");
             // Get key and add it to the output
             String userKey =

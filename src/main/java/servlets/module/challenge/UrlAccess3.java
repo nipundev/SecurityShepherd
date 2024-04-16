@@ -94,7 +94,7 @@ public class UrlAccess3 extends HttpServlet {
           String decodedCookie = new String(decodedCookieBytes, "UTF-8");
           log.debug("Decoded Cookie: " + decodedCookie);
 
-          if (decodedCookie.equals("MrJohnReillyTheSecond")) {
+          if ("MrJohnReillyTheSecond".equals(decodedCookie)) {
             log.debug("Super Admin Cookie detected");
             // Get key and add it to the output
             String userKey =
@@ -112,7 +112,7 @@ public class UrlAccess3 extends HttpServlet {
                     + userKey
                     + "</a>"
                     + "</p>";
-          } else if (!decodedCookie.equals("aGuest")) {
+          } else if (!"aGuest".equals(decodedCookie)) {
             log.debug("Tampered role cookie detected: " + decodedCookie);
             htmlOutput = "<!-- " + bundle.getString("response.invalidUser") + " -->";
           } else {
@@ -133,8 +133,8 @@ public class UrlAccess3 extends HttpServlet {
             String paramTwo = request.getParameter(redherringTwo).toString();
             log.debug("Param value of " + redherringOne + ":" + paramOne);
             log.debug("Param value of " + redherringTwo + ":" + paramTwo);
-            badUserId = paramOne.equalsIgnoreCase("d3d9446802a44259755d38e6d163e820");
-            hackDetected = !badUserId && !paramTwo.equalsIgnoreCase("true");
+            badUserId = "d3d9446802a44259755d38e6d163e820".equalsIgnoreCase(paramOne);
+            hackDetected = !badUserId && !"true".equalsIgnoreCase(paramTwo);
           }
           if (!hackDetected) {
             htmlOutput =

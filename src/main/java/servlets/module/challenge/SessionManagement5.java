@@ -115,7 +115,7 @@ public class SessionManagement5 extends HttpServlet {
         if (resultSet.next()) {
           log.debug("User found");
           // Is the user an Admin?
-          if (resultSet.getString(2).equalsIgnoreCase("admin")) {
+          if ("admin".equalsIgnoreCase(resultSet.getString(2))) {
             log.debug("Admin Detected");
             callstmt =
                 conn.prepareStatement(

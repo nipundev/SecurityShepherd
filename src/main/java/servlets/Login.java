@@ -104,11 +104,11 @@ public class Login extends HttpServlet {
         response.addCookie(token);
         mustRedirect = true;
 
-        if (user[3].equalsIgnoreCase("true")) {
+        if ("true".equalsIgnoreCase(user[3])) {
           log.debug("Temporary Password Detected, user will be prompted to change");
           ses.setAttribute("ChangePassword", "true");
         }
-        if (user[5].equalsIgnoreCase("true")) {
+        if ("true".equalsIgnoreCase(user[5])) {
           log.debug("Temporary Username Detected, user will be prompted to change");
           ses.setAttribute("ChangeUsername", "true");
         }

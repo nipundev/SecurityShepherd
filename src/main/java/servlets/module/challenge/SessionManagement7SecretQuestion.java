@@ -227,7 +227,7 @@ public class SessionManagement7SecretQuestion extends HttpServlet {
           byte[] decodedCookieBytes = Base64.decodeBase64(theCookie.getValue());
           String decodedCookie = new String(decodedCookieBytes, "UTF-8");
           log.debug("Decoded Cookie: " + decodedCookie);
-          if (decodedCookie.equals("doNotReturnAnswers")) // Untampered Cookie
+          if ("doNotReturnAnswers".equals(decodedCookie)) // Untampered Cookie
           {
             // Question not translated as DB will only mark English answers as correct
             htmlOutput = new String("What is your favourite flower?");

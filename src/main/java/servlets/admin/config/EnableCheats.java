@@ -62,7 +62,7 @@ public class EnableCheats extends HttpServlet {
       if (Validate.validateTokens(tokenCookie, tokenParameter)) {
         // Enable for all or for admins?
         String enableFor = Validate.validateParameter(request.getParameter("enableForAll"), 16);
-        if (enableFor.equalsIgnoreCase("true")) {
+        if ("true".equalsIgnoreCase(enableFor)) {
           CheatSheetStatus.enableForAll();
           log.debug("Cheat Sheets Enabled");
           out.write(

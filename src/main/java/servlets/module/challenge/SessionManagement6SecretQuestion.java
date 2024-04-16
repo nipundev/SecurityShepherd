@@ -202,7 +202,7 @@ public class SessionManagement6SecretQuestion extends HttpServlet {
           String decodedCookie = new String(decodedCookieBytes, "UTF-8");
           log.debug("Decoded Cookie: " + decodedCookie);
 
-          if (decodedCookie.equals("doNotReturnAnswers")) // Untampered Cookie
+          if ("doNotReturnAnswers".equals(decodedCookie)) // Untampered Cookie
           {
             log.debug("Getting Parameter");
             Object emailObj = request.getParameter("subEmail");

@@ -174,7 +174,7 @@ public class Getter {
           throw new RuntimeException(e);
         }
 
-        if (!loginType.equals("login")) {
+        if (!"login".equals(loginType)) {
           // Login type must be "login" and not "saml" if password login is to be allowed
           log.debug("User is SSO user, can't login with password!");
           result = null;
@@ -1438,7 +1438,7 @@ public class Getter {
       log.debug("Opening Result Set from moduleGetHash");
       modules.next(); // Exception thrown if no hash was found
       // Set Type. Used to ensure the URL points at the correct directory
-      if (modules.getString(3).equalsIgnoreCase("challenge")) {
+      if ("challenge".equalsIgnoreCase(modules.getString(3))) {
         type = "challenges";
       } else {
         type = "lessons";
@@ -1805,7 +1805,7 @@ public class Getter {
                 + "'>"
                 + Encode.forHtml(modules.getString(2))
                 + "</option>\n";
-        if (modules.getString(3).equalsIgnoreCase("open")) {
+        if ("open".equalsIgnoreCase(modules.getString(3))) {
           // Module is Open currently, so add it to the open side of the list
           openModules += theModule;
         } else {
@@ -2419,7 +2419,7 @@ public class Getter {
       prepStmt.setString(1, moduleId);
       ResultSet rs = prepStmt.executeQuery();
       if (rs.next()) {
-        if (rs.getString(1).equalsIgnoreCase("open")) {
+        if ("open".equalsIgnoreCase(rs.getString(1))) {
           result = true;
         }
       }

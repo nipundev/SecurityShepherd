@@ -221,10 +221,10 @@ public class BrokenCryptoHomeMade extends HttpServlet {
             for (int i = 0; i < BrokenCryptoHomeMade.challenges.size(); i++) {
               htmlOutput += "<tr><td>" + BrokenCryptoHomeMade.challenges.get(i).get(0) + "</td>";
               htmlOutput += "<td>" + BrokenCryptoHomeMade.challenges.get(i).get(1) + "</td>";
-              if (!BrokenCryptoHomeMade.challenges
+              if (!"This Challenge"
+                  .equalsIgnoreCase(BrokenCryptoHomeMade.challenges
                   .get(i)
-                  .get(0)
-                  .equalsIgnoreCase("This Challenge")) {
+                  .get(0))) {
                 htmlOutput +=
                     "<td>"
                         + BrokenCryptoHomeMade.generateUserSolution(

@@ -135,7 +135,7 @@ public class GetModuleIT {
       log.debug(moduleAddress);
       // Resetting Module Block
       ModuleBlock.reset();
-      if (moduleAddress.equalsIgnoreCase("../blockedMessage.jsp")) {
+      if ("../blockedMessage.jsp".equalsIgnoreCase(moduleAddress)) {
         log.debug("Blocked Module Address Returned: PASS");
       } else {
         String message = "Module Address Returned was not the Blocked Message Page";

@@ -82,7 +82,7 @@ public class SqlInjectionLesson extends HttpServlet {
             "<h2 class='title'>" + bundle.getString("response.searchResults") + "</h2>";
         if (output[0][0] == null) {
           htmlOutput += "<p>" + bundle.getString("response.noResults") + "</p>";
-        } else if (output[0][0].equalsIgnoreCase("error")) {
+        } else if ("error".equalsIgnoreCase(output[0][0])) {
           log.debug("Setting Error Message");
           htmlOutput +=
               "<p>" + errors.getString("error.detected") + "</p>" + "<p>" + output[0][1] + "</p>";

@@ -94,7 +94,7 @@ public class UnvalidatedForwardsLesson extends HttpServlet {
             log.debug("Url Port: " + csrfUrl.getPort());
             log.debug("Url Path: " + csrfUrl.getPath());
             log.debug("Url Query: " + csrfUrl.getQuery());
-            validSolution = csrfUrl.getPath().toLowerCase().equalsIgnoreCase("/user/redirect");
+            validSolution = "/user/redirect".equalsIgnoreCase(csrfUrl.getPath().toLowerCase());
             if (!validSolution) {
               log.debug("Invalid Solution: Bad Path or Above");
             }

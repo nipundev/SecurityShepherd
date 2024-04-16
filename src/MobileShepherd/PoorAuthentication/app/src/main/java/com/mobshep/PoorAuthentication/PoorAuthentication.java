@@ -117,7 +117,7 @@ public class PoorAuthentication extends Activity implements OnClickListener {
           empty.show();
         }
 
-        if (CheckName.equals("Jack") == false
+        if ("Jack".equals(CheckName) == false
             || CheckPass.equals(Forgotton.tempPassVar) == false
             || passwordReset == false) {
           Toast invalid =

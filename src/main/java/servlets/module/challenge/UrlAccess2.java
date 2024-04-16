@@ -70,7 +70,7 @@ public class UrlAccess2 extends HttpServlet {
       String htmlOutput = new String();
       try {
         String userData = request.getParameter("guestData");
-        boolean tamperedRequest = !userData.equalsIgnoreCase("sOdjh318UD8ismcoa98smcj21dmdoaoIS9");
+        boolean tamperedRequest = !"sOdjh318UD8ismcoa98smcj21dmdoaoIS9".equalsIgnoreCase(userData);
         if (!tamperedRequest) {
           log.debug("No request tampering detected");
         } else {

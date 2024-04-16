@@ -90,7 +90,7 @@ public class LoggedIn extends Activity {
     SharedPreferences prefs = this.getSharedPreferences("Sessions", MODE_PRIVATE);
     String sessionId = prefs.getString("sessionId", "null");
 
-    if (sessionId.equals("null")) {
+    if ("null".equals(sessionId)) {
       finish();
       Intent intent = new Intent(LoggedIn.this, MainActivity.class);
       startActivity(intent);

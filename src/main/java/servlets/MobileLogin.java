@@ -98,7 +98,7 @@ public class MobileLogin extends HttpServlet {
         response.addCookie(token);
         authenticated = true;
 
-        if (user[3].equalsIgnoreCase("true")) {
+        if ("true".equalsIgnoreCase(user[3])) {
           log.debug("Temporary Password Detected, user will be prompted to change");
           ses.setAttribute("ChangePassword", "true");
         }

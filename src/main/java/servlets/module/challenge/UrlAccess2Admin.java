@@ -70,7 +70,7 @@ public class UrlAccess2Admin extends HttpServlet {
 
       try {
         String userData = request.getParameter("adminData");
-        boolean tamperedRequest = !userData.equalsIgnoreCase("youAreAnAdminOfAwesomenessWoopWoop");
+        boolean tamperedRequest = !"youAreAnAdminOfAwesomenessWoopWoop".equalsIgnoreCase(userData);
         if (!tamperedRequest) {
           log.debug("No request tampering detected");
         } else {

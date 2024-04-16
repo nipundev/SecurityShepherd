@@ -88,7 +88,7 @@ public class EnableScoreboard extends HttpServlet {
             } else {
               log.debug("Restricted scoreboard value found");
 
-              boolean isAdminOnly = restrictedScoreboard.equals("true");
+              boolean isAdminOnly = "true".equals(restrictedScoreboard);
 
               if (!isAdminOnly) {
                 // Scoreboard is public
@@ -115,7 +115,7 @@ public class EnableScoreboard extends HttpServlet {
               }
             }
 
-          } else if (classId.equalsIgnoreCase("classSpecific")) {
+          } else if ("classSpecific".equalsIgnoreCase(classId)) {
             // Set Class Specific Scoreboards
 
             ScoreboardStatus.setScoreboardClassSpecific();
@@ -148,10 +148,10 @@ public class EnableScoreboard extends HttpServlet {
             String restrictedScoreboard =
                 Validate.validateParameter(request.getParameter("restricted"), 5);
 
-            boolean isAdminOnly = restrictedScoreboard.equals("true");
+            boolean isAdminOnly = "true".equals(restrictedScoreboard);
 
-            if (restrictedScoreboard.equals("false")
-                && classId.equalsIgnoreCase("classSpecific")) // Total
+            if ("false".equals(restrictedScoreboard)
+                && "classSpecific".equalsIgnoreCase(classId)) // Total
             // Public
             // Scoreboard
             {
@@ -162,7 +162,7 @@ public class EnableScoreboard extends HttpServlet {
                       + scoreboardMessage
                       + "</p>";
             } else {
-              if (!classId.equalsIgnoreCase("classSpecific") && isAdminOnly) {
+              if (!"classSpecific".equalsIgnoreCase(classId) && isAdminOnly) {
                 ScoreboardStatus.setScoreboardAdminOnly();
                 log.debug("Admin Only Scoreboard Enabled");
                 htmlOutput =
@@ -170,7 +170,7 @@ public class EnableScoreboard extends HttpServlet {
                         + "<p>"
                         + scoreboardMessage
                         + " The scoreboard is only accessible by administrators</p>";
-              } else if (!classId.equalsIgnoreCase("classSpecific") && isAdminOnly) {
+              } else if (!"classSpecific".equalsIgnoreCase(classId) && isAdminOnly) {
                 ScoreboardStatus.setScoreboardPublic();
                 log.debug("Public Scoreboard Enabled");
                 htmlOutput =

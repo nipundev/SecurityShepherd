@@ -144,7 +144,7 @@ public class GetJsonProgressIT {
       request.setCookies(response.getCookies());
       String responseBody = doThePost(csrfToken, "Anything");
       if (responseBody.contains("loggedOutSheep")
-          || responseBody.equalsIgnoreCase("Error Occurred!")) {
+          || "Error Occurred!".equalsIgnoreCase(responseBody)) {
         String message = "Get JSON Progress Failed";
         log.fatal(message);
         fail(message);
@@ -178,7 +178,7 @@ public class GetJsonProgressIT {
       // Add Cookies from Response to outgoing request
       request.setCookies(response.getCookies());
       String responseBody = doThePost("wrongToken", moduleId);
-      if (responseBody.equalsIgnoreCase("Error Occurred!")) {
+      if ("Error Occurred!".equalsIgnoreCase(responseBody)) {
         log.debug("CSRF Error Occurred (Expected Empty Response)");
       } else {
         String message = "CSRF Error Not Detected with Bad CSRF Token";

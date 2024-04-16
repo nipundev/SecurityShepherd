@@ -57,7 +57,7 @@ public class poorAuth_Reset extends Activity {
       empty.show();
     }
 
-    if (CheckQ1.equalsIgnoreCase("Chicken") && CheckQ2.equalsIgnoreCase("Meade")) {
+    if ("Chicken".equalsIgnoreCase(CheckQ1) && "Meade".equalsIgnoreCase(CheckQ2)) {
       Toast reset = Toast.makeText(poorAuth_Reset.this, "Password Reset.", Toast.LENGTH_SHORT);
       reset.show();
 

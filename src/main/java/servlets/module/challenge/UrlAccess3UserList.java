@@ -100,7 +100,7 @@ public class UrlAccess3UserList extends HttpServlet {
         ResultSet rs = callstmt.executeQuery();
         while (rs.next()) {
           htmlOutput += Encode.forHtml(rs.getString(1)) + "<br>";
-          if (rs.getString(1).equalsIgnoreCase("MrJohnReillyTheSecond")) {
+          if ("MrJohnReillyTheSecond".equalsIgnoreCase(rs.getString(1))) {
             log.debug("Super Admin contained in response");
           }
         }
