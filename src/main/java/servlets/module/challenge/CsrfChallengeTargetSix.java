@@ -4,6 +4,7 @@ import dbProcs.Getter;
 import dbProcs.Setter;
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.security.SecureRandom;
 import java.util.Locale;
 import java.util.Random;
 import java.util.ResourceBundle;
@@ -85,7 +86,7 @@ public class CsrfChallengeTargetSix extends HttpServlet {
         if (ses.getAttribute(csrfTokenName) == null
             || ses.getAttribute(csrfTokenName).toString().isEmpty()) {
           log.debug("No CSRF Token associated with user");
-          Random random = new Random();
+          Random random = new SecureRandom();
           int newToken = random.nextInt(3);
           storedToken = csrfArray[newToken];
           out.write(
