@@ -1,5 +1,6 @@
 package com.mobshep.insufficienttls;
 
+import io.github.pixee.security.BoundedLineReader;
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
@@ -63,7 +64,7 @@ public class CustomHttpClient {
       StringBuffer sb = new StringBuffer("");
       String line = "";
       String NL = System.getProperty("line.separator");
-      while ((line = in.readLine()) != null) {
+      while ((line = BoundedLineReader.readLine(in, 5_000_000)) != null) {
         sb.append(line + NL);
       }
       in.close();
@@ -102,7 +103,7 @@ public class CustomHttpClient {
       StringBuffer sb = new StringBuffer("");
       String line = "";
       String NL = System.getProperty("line.separator");
-      while ((line = in.readLine()) != null) {
+      while ((line = BoundedLineReader.readLine(in, 5_000_000)) != null) {
         sb.append(line + NL);
       }
       in.close();

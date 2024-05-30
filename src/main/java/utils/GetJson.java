@@ -1,5 +1,6 @@
 package utils;
 
+import io.github.pixee.security.BoundedLineReader;
 import java.io.BufferedReader;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
@@ -14,7 +15,7 @@ public class GetJson {
     String line = null;
     // Buffer entire JSON array
     try {
-      while ((line = reader.readLine()) != null) {
+      while ((line = BoundedLineReader.readLine(reader, 5_000_000)) != null) {
         jb.append(line);
       }
     } catch (Exception e) {
