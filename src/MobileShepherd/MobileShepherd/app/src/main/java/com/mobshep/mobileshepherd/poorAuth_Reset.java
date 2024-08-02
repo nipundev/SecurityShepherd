@@ -7,6 +7,7 @@ import android.view.View;
 import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
+import java.security.SecureRandom;
 import java.util.Random;
 
 /**
@@ -75,7 +76,7 @@ public class poorAuth_Reset extends Activity {
     }
   }
 
-  private static Random random = new Random();
+  private static Random random = new SecureRandom();
 
   public static String getRandomNumber(int digCount) {
     StringBuilder sb = new StringBuilder(digCount);
