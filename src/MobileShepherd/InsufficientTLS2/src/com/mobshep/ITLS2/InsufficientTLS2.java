@@ -13,6 +13,7 @@ import android.view.View.OnClickListener;
 import android.widget.Button;
 import android.widget.ProgressBar;
 import android.widget.Toast;
+import io.github.pixee.security.BoundedLineReader;
 import java.io.BufferedReader;
 import java.io.DataOutputStream;
 import java.io.IOException;
@@ -141,7 +142,7 @@ public class InsufficientTLS2 extends Activity implements OnClickListener {
         String inputLine;
         StringBuffer response = new StringBuffer();
 
-        while ((inputLine = in.readLine()) != null) {
+        while ((inputLine = BoundedLineReader.readLine(in, 5_000_000)) != null) {
           response.append(inputLine);
         }
         in.close();
