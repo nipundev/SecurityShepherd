@@ -4,6 +4,7 @@ import dbProcs.Database;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.sql.Connection;
+import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
@@ -73,14 +74,12 @@ public class SqlInjectionStoredProcedure extends HttpServlet {
         String userIdentity = request.getParameter("userIdentity");
         log.debug("User Submitted - " + userIdentity);
         String ApplicationRoot = getServletContext().getRealPath("");
-
         log.debug("Getting Connection to Database");
         Connection conn =
             Database.getChallengeConnection(ApplicationRoot, "SqlChallengeStoredProc");
-        // CallableStatement callstmt = conn.prepareCall("CALL findUser('" + userIdentity + "');");
-        Statement stmt = conn.createStatement();
-        ResultSet resultSet = stmt.executeQuery("CALL findUser('" + userIdentity + "');");
-
+        PreparedStatement stmt = conn.prepareStatement("CALL findUser(?);");
+        stmt.setString(1, request.getParameter("userIdentity"));
+        ResultSet resultSet = stmt.execute();
         int i = 0;
         htmlOutput = "<h2 class='title'>" + bundle.getString("response.searchResults") + "</h2>";
         htmlOutput +=
@@ -91,7 +90,6 @@ public class SqlInjectionStoredProcedure extends HttpServlet {
                 + "</th><th>"
                 + bundle.getString("response.table.comment")
                 + "</th></tr>";
-
         log.debug("Opening Result Set from query");
         while (resultSet.next()) {
           log.debug("Adding Customer " + resultSet.getString(2));
@@ -110,6 +108,10 @@ public class SqlInjectionStoredProcedure extends HttpServlet {
         if (i == 0) {
           htmlOutput = "<p>" + bundle.getString("response.noResults") + "</p>";
         }
+
+
+
+
       } catch (SQLException e) {
         log.debug("SQL Error caught - " + e.toString());
         htmlOutput +=

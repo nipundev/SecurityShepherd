@@ -4,6 +4,7 @@ import dbProcs.Database;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.sql.Connection;
+import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
@@ -88,36 +89,29 @@ public class SqlInjection4 extends HttpServlet {
         log.debug("Filtered to " + thePassword);
         String ApplicationRoot = getServletContext().getRealPath("");
         log.debug("Servlet root = " + ApplicationRoot);
-
         log.debug("Getting Connection to Database");
         Connection conn = Database.getChallengeConnection(ApplicationRoot, "SqlChallengeFour");
-        Statement stmt = conn.createStatement();
+        PreparedStatement stmt = conn.prepareStatement("SELECT userName FROM users WHERE userName = ? AND userPassword = ?");
         log.debug("Gathering result set");
+        stmt.setString(1, theUserName);
+        stmt.setString(2, thePassword);
         ResultSet resultSet =
-            stmt.executeQuery(
-                "SELECT userName FROM users WHERE userName = '"
-                    + theUserName
-                    + "' AND userPassword = '"
-                    + thePassword
-                    + "'");
-
+            stmt.execute(
+            );
         int i = 0;
         htmlOutput = "<h2 class='title'>" + bundle.getString("response.loginResults") + "</h2>";
-
         log.debug("Opening Result Set from query");
         if (resultSet.next()) {
           log.debug("Signed in as " + resultSet.getString(1));
           htmlOutput +=
               "<p>"
                   + bundle.getString("response.signedInAs")
-                  + ""
                   + Encode.forHtml(resultSet.getString(1))
                   + "</p>";
           if (resultSet.getString(1).equalsIgnoreCase("admin")) {
             htmlOutput +=
                 "<p>"
                     + bundle.getString("response.adminResultKey")
-                    + ""
                     + "<a>"
                     + Encode.forHtml(levelResult)
                     + "</a>";
@@ -134,6 +128,9 @@ public class SqlInjection4 extends HttpServlet {
                   + bundle.getString("response.superSecure")
                   + "</p>";
         }
+
+
+
       } catch (SQLException e) {
         log.debug("SQL Error caught - " + e.toString());
         htmlOutput +=

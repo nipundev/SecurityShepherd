@@ -4,6 +4,7 @@ import dbProcs.Database;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.sql.Connection;
+import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
@@ -82,15 +83,14 @@ public class SqlInjectionEmail extends HttpServlet {
           log.debug("Filtered to " + userIdentity);
           String ApplicationRoot = getServletContext().getRealPath("");
           log.debug("Servlet root = " + ApplicationRoot);
-
           log.debug("Getting Connection to Database");
           Connection conn = Database.getChallengeConnection(ApplicationRoot, "SqlChallengeEmail");
-          Statement stmt = conn.createStatement();
+          PreparedStatement stmt = conn.prepareStatement("SELECT * FROM customers WHERE customerAddress = ?");
           log.debug("Gathering result set");
+          stmt.setString(1, request.getParameter("userIdentity"));
           ResultSet resultSet =
-              stmt.executeQuery(
-                  "SELECT * FROM customers WHERE customerAddress = '" + userIdentity + "'");
-
+              stmt.execute(
+              );
           int i = 0;
           htmlOutput = "<h2 class='title'>" + bundle.getString("response.searchResults") + "</h2>";
           htmlOutput +=
@@ -101,7 +101,6 @@ public class SqlInjectionEmail extends HttpServlet {
                   + "</th><th>"
                   + bundle.getString("response.table.comment")
                   + "</th></tr>";
-
           log.debug("Opening Result Set from query");
           while (resultSet.next()) {
             log.debug("Adding Customer " + resultSet.getString(2));
@@ -120,14 +119,16 @@ public class SqlInjectionEmail extends HttpServlet {
           if (i == 0) {
             htmlOutput = "<p>" + bundle.getString("response.noResults") + "</p>";
           }
+
+
+
         } else {
           htmlOutput =
               new String(
                   "<h2 class='title'>"
                       + bundle.getString("response.searchError")
                       + "</h2><p>"
-                      + bundle.getString("response.invalidEmail")
-                      + "");
+                      + bundle.getString("response.invalidEmail"));
         }
       } catch (SQLException e) {
         log.debug("SQL Error caught - " + e.toString());
