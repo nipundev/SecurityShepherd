@@ -4,6 +4,7 @@ import dbProcs.Database;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.sql.Connection;
+import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
@@ -130,10 +131,11 @@ public class SqlInjectionLesson extends HttpServlet {
     String[][] result = new String[10][3];
     try {
       Connection conn = Database.getSqlInjLessonConnection(ApplicationRoot);
-      Statement stmt;
-      stmt = conn.createStatement();
+      PreparedStatement stmt = null;
+      stmt = conn.prepareStatement("SELECT * FROM tb_users WHERE username = ?");
+      stmt.setString(1, username);
       ResultSet resultSet =
-          stmt.executeQuery("SELECT * FROM tb_users WHERE username = '" + username + "'");
+          stmt.execute();
       log.debug("Opening Result Set from query");
       for (int i = 0; resultSet.next(); i++) {
         log.debug("Row " + i + ": User ID = " + resultSet.getString(1));
