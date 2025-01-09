@@ -1,5 +1,7 @@
 package utils;
 
+import io.github.pixee.security.HostValidator;
+import io.github.pixee.security.Urls;
 import java.net.MalformedURLException;
 import java.net.URL;
 import org.apache.logging.log4j.LogManager;
@@ -41,12 +43,11 @@ public class XssFilter {
     if (input.startsWith("http")) {
       try {
         URL theUrl =
-            new URL(
-                input
+            Urls.create(input
                     .replaceAll("#", "&#x23;")
                     .replaceFirst("<", "&#x3c;")
                     .replaceFirst(">", "&#x3e;")
-                    .replaceFirst("\"", "&quot;"));
+                    .replaceFirst("\"", "&quot;"), Urls.HTTP_PROTOCOLS, HostValidator.DENY_COMMON_INFRASTRUCTURE_TARGETS);
         input = theUrl.toString();
       } catch (MalformedURLException e) {
         log.debug("Could not Cast URL from input: " + e.toString());
@@ -72,12 +73,11 @@ public class XssFilter {
     if (input.startsWith("http")) {
       try {
         URL theUrl =
-            new URL(
-                input
+            Urls.create(input
                     .replaceAll("#", "&#x23;")
                     .replaceAll("<", "&#x3c;")
                     .replaceAll(">", "&#x3e;")
-                    .replaceFirst("\"", "&quot;"));
+                    .replaceFirst("\"", "&quot;"), Urls.HTTP_PROTOCOLS, HostValidator.DENY_COMMON_INFRASTRUCTURE_TARGETS);
         input = theUrl.toString();
       } catch (MalformedURLException e) {
         log.debug("Could not Cast URL from input: " + e.toString());
