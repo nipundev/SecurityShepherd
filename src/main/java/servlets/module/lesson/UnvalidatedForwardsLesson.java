@@ -1,6 +1,8 @@
 package servlets.module.lesson;
 
 import dbProcs.Getter;
+import io.github.pixee.security.HostValidator;
+import io.github.pixee.security.Urls;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.net.MalformedURLException;
@@ -89,7 +91,7 @@ public class UnvalidatedForwardsLesson extends HttpServlet {
           boolean validSolution = false;
           boolean validAttack = false;
           try {
-            URL csrfUrl = new URL(messageForAdmin);
+            URL csrfUrl = Urls.create(messageForAdmin, Urls.HTTP_PROTOCOLS, HostValidator.DENY_COMMON_INFRASTRUCTURE_TARGETS);
             log.debug("Url Host: " + csrfUrl.getHost());
             log.debug("Url Port: " + csrfUrl.getPort());
             log.debug("Url Path: " + csrfUrl.getPath());
