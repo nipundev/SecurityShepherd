@@ -11,6 +11,7 @@ import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.Toast;
+import java.security.SecureRandom;
 import java.util.Random;
 
 public class MainActivity extends ActionBarActivity {
@@ -128,7 +129,7 @@ public class MainActivity extends ActionBarActivity {
     return super.onOptionsItemSelected(item);
   }
 
-  private static Random random = new Random();
+  private static Random random = new SecureRandom();
 
   public static String getRandomNumber(int digCount) {
     StringBuilder sb = new StringBuilder(digCount);

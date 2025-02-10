@@ -1,5 +1,6 @@
 package dbProcs;
 
+import java.security.SecureRandom;
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertTrue;
@@ -47,7 +48,7 @@ public class SetterTest {
    */
   @Test
   public void testClassCreate() throws SQLException {
-    Random rand = new Random();
+    Random rand = new SecureRandom();
     String className = "newC" + rand.nextInt(50) + rand.nextInt(50) + rand.nextInt(50);
     if (!Setter.classCreate(applicationRoot, className, "2015")) {
       TestProperties.failAndPrint("Could not Create Class");
