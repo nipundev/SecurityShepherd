@@ -1,5 +1,7 @@
 package utils;
 
+import io.github.pixee.security.HostValidator;
+import io.github.pixee.security.Urls;
 import java.io.ByteArrayInputStream;
 import java.io.ByteArrayOutputStream;
 import java.io.InputStream;
@@ -233,7 +235,7 @@ public class FindXSS {
           boolean validUrl = false;
           log.debug("Validating URL for Solution");
           try {
-            URL csrfUrl = new URL(tempMessage);
+            URL csrfUrl = Urls.create(tempMessage, Urls.HTTP_PROTOCOLS, HostValidator.DENY_COMMON_INFRASTRUCTURE_TARGETS);
             log.debug("URL Host: " + csrfUrl.getHost());
             log.debug("URL Port: " + csrfUrl.getPort());
             log.debug("URL Path: " + csrfUrl.getPath());
@@ -278,7 +280,7 @@ public class FindXSS {
   public static boolean findCsrfAttackUrl(String theUrl, String csrfAttackPath) {
     boolean validAttack = false;
     try {
-      URL theAttack = new URL(theUrl);
+      URL theAttack = Urls.create(theUrl, Urls.HTTP_PROTOCOLS, HostValidator.DENY_COMMON_INFRASTRUCTURE_TARGETS);
       log.debug("theAttack Host: " + theAttack.getHost());
       log.debug("theAttack Port: " + theAttack.getPort());
       log.debug("theAttack Path: " + theAttack.getPath());
@@ -314,7 +316,7 @@ public class FindXSS {
       String userIdParameterValue) {
     boolean validAttack = false;
     try {
-      URL theAttack = new URL(theUrl);
+      URL theAttack = Urls.create(theUrl, Urls.HTTP_PROTOCOLS, HostValidator.DENY_COMMON_INFRASTRUCTURE_TARGETS);
       log.debug("csrfAttackPath: " + csrfAttackPath);
       log.debug("theAttack Host: " + theAttack.getHost());
       log.debug("theAttack Port: " + theAttack.getPort());
